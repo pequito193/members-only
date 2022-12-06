@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  div.wrapper
+    div.title-wrapper
+      a.title(href='/sign-up') Sign Up
+      a.title(href='/sign-in') Sign In
+    form.form(action='' method='post')
+      input.input(name='username' type='text' required='true' maxlength=30 placeholder='Name')
+      input.input(name='username' type='email' required='true' maxlength=30 placeholder='Email')
+      input.input(name='password' type='password' required='true' placeholder='Password')
+      input.input(name='confirm-password' type='password' required='true' placeholder='Confirm Password')
+      button.button(type='submit') Sign Up
