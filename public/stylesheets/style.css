@@ -93,3 +93,7 @@ ol, ul {
 	color: rgb(44, 80, 196);
 	cursor: pointer;
 }
+
+.message {
+	font-size: 1rem;
+}
