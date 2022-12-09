@@ -2,26 +2,36 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/user_model');
-const passport = require('passport');
+const passport = require('../passport');
 
 
 
-// GET requests to render pages
+// GET requests to render pages ---------------------------------------------------------------------------------------------------------------
+router.get('*', function(req, res, next) {
+  res.locals.loggedIn = (req.user) ? true : false;
+  next();
+})
+
 router.get('/', function(req, res, next) {
-  res.redirect('/sign-up');
+  res.render('index');
 })
 
 router.get('/sign-up', function(req, res, next) {
   res.render('sign-up');
 });
 
-router.get('/sign-in', function(req, res, next) {
+router.get('/log-in', function(req, res, next) {
   res.render('log-in');
+})
+
+// Catch all route to redirect all unwanted URLs back to the index
+router.get('*', function(req, res, next) {
+  res.redirect('/')
 })
 
 
 
-// POST requests to submit a form
+// POST requests to submit a form ---------------------------------------------------------------------------------------------------------------
 router.post('/sign-up', function(req, res, next) {
   const password = req.body.password;
   const confirmPassword = req.body.confirmPassword;
@@ -62,11 +72,20 @@ router.post('/sign-up', function(req, res, next) {
   });
 })
 
-router.post('/sign-in', function(req, res, next) {
+router.post('/log-in', function(req, res, next) {
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/log-in"
-  })
+    failureRedirect: "/"
+  })(req, res, next);
+})
+
+router.post('/log-out', function(req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
 })
 
 module.exports = router;
