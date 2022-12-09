@@ -5,5 +5,16 @@ html
     link(rel='shortcut icon' href='/images/members.png')
     link(rel='stylesheet' href='/stylesheets/style.css')
   body
+  div.main
+    div.sidebar
+      if (loggedIn)
+        h1 WELCOME BACK #{user.username}
+        a.link(href='/') Forum
+        form(action='/log-out' method='post')
+          button.link(type='submit') Log Out
+      else
+        a.link-forum(href='/') Forum
+        a.link(href='/sign-up') Sign Up
+        a.link(href='/log-in') Log In
     div.background
       block content

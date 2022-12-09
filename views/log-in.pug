@@ -4,8 +4,8 @@ block content
   div.wrapper
     div.title-wrapper
       a.title.sign-up(href='/sign-up') Sign Up
-      a.title(href='/sign-in') Sign In
-    form.form(action='' method='post')
+      a.title(href='/log-in') Log In
+    form.form(action='/log-in' method='post')
       input.input(name='username' type='text' required='true' maxlength=30 placeholder='Name')
       input.input(name='password' type='password' required='true' placeholder='Password')
-      button.button(type='submit') Sign In
+      button.button(type='submit') Log In
