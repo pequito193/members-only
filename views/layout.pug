@@ -8,12 +8,13 @@ html
   div.main
     div.sidebar
       if (loggedIn)
-        h1.title Logged in as #{user}
-        a.link-forum(href='/') Forum
+        h1.sidebar-title Logged in as #{user.username}
+        a.link(href='/') Forum
         form(action='/log-out' method='post')
           button.link(type='submit') Log Out
       else
-        a.link-forum(href='/') Homepage
+        h1.sidebar-title Not logged in
+        a.link(href='/') Forum
         a.link(href='/sign-up') Sign In
     div.background
       block content
