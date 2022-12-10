@@ -1,5 +1,19 @@
 extends layout
 
 block content
-    div.wrapper
+    if (loggedIn)
         a.new-message(href='/forum/new-message') New Message
+        for message in messages
+            div.card
+                p.name-date #{message.username}, #{new Date(message.date).toISOString().replace('-', '/').split('T')[0].replace('-', '/')}
+                p.text #{message.text}
+                if (user.username === message.username)
+                    form(action='/forum/delete-message' method='post')
+                        input.invisible(name='id' value=`${message._id}`)
+                        button.delete(type='submit') Delete
+    else
+        p.warning Go log in!
+        for message in messages
+            div.card
+                p.name-date Anonymous, #{new Date(message.date).toISOString().replace('-', '/').split('T')[0].replace('-', '/')}
+                p.text #{message.text}

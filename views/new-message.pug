@@ -1,3 +1,8 @@
 extends layout
 
 block content
+    form.form(action='/forum/new-message' method='post')
+        textarea.new-message-input(name='text' type='text' required='true' placeholder='Your Message' style='resize:none')
+        input.invisible(name='username' value=`${user.username}`)
+        button.button(type='submit') Submit
+        a.button(href='/forum') Cancel
